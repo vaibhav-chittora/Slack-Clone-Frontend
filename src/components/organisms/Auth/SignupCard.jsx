@@ -2,16 +2,19 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
-import { useState } from "react"
+import { LucideLoader, LucideLoader2, TriangleAlert } from "lucide-react"
 import { Link } from "react-router-dom"
 
-function SignupCard() {
-    const [signupForm, setSignupForm] = useState({
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    })
+function SignupCard({
+    error,
+    isPending,
+    isSuccess,
+    signupForm,
+    setSignupForm,
+    validationError,
+    onSignupFormSubmit
+}) {
+
 
 
     return (
@@ -22,46 +25,85 @@ function SignupCard() {
                     <CardDescription>
                         Sign up to create your account
                     </CardDescription>
+
+                    {validationError && (
+                        <div
+                            className="flex items-center gap-2 bg-destructive/15 text-destructive rounded-md p-3 mt-3"
+                        >
+                            <TriangleAlert className='size-5' />
+                            <p>
+                                {validationError.message}
+                            </p>
+                        </div>
+                    )}
+
+                    {error && (
+                        <div
+                            className="flex items-center gap-2 bg-destructive/15 text-destructive rounded-md p-3 mt-3"
+                        >
+                            <TriangleAlert className='size-5' />
+                            <p>
+                                {error.message}
+                            </p>
+                        </div>
+                    )}
+                    {isSuccess && (
+                        <div
+                            className="flex items-center gap-2 bg-green-100 text-green-500 rounded-md p-3 mt-3"
+                        >
+                            <LucideLoader className='animate-spin ml-2' />
+                            <p>
+                                Signup Successful, redirecting you to login page...
+                            </p>
+                        </div>
+                    )}
+
+
+
                 </CardHeader>
                 <CardContent>
-                    <form className="space-y-3" >
+                    <form className="space-y-3" onSubmit={onSignupFormSubmit} >
                         <Input
                             type="text"
                             placeholder="Username"
-                            onchange={(e) => setSignupForm({ ...signupForm, username: e.target.value })}
+                            onChange={(e) => setSignupForm({ ...signupForm, username: e.target.value })}
                             value={signupForm.username}
                             required
+                            disabled={isPending}
 
                         />
                         <Input
                             required
                             type="email"
                             placeholder="Email"
-                            onchange={(e) => setSignupForm({ ...signupForm, email: e.target.value })}
+                            onChange={(e) => setSignupForm({ ...signupForm, email: e.target.value })}
                             value={signupForm.email}
-
+                            disabled={isPending}
                         />
                         <Input
                             type="password"
                             placeholder="Password"
-                            onchange={(e) => setSignupForm({ ...signupForm, password: e.target.value })}
+                            onChange={(e) => setSignupForm({ ...signupForm, password: e.target.value })}
                             value={signupForm.password}
+                            disabled={isPending}
                             required
 
                         />
                         <Input
                             type="password"
                             placeholder="Confirm Password"
-                            onchange={(e) => setSignupForm({ ...signupForm, confirmPassword: e.target.value })}
+                            onChange={(e) => setSignupForm({ ...signupForm, confirmPassword: e.target.value })}
                             value={signupForm.confirmPassword}
                             required
+                            disabled={isPending}
 
                         />
                         <Button
                             type="submit"
                             className="w-full"
                             size="lg"
-                            disabled={false}
+                            disabled={isPending}
+
                         >
                             Continue
                         </Button>

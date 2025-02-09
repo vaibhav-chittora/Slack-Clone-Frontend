@@ -30,7 +30,7 @@ function SigninCard() {
                             required
                             type="email"
                             placeholder="Email"
-                            onchange={(e) => setSigninForm({ ...signinForm, email: e.target.value })}
+                            onChange={(e) => setSigninForm({ ...signinForm, email: e.target.value })}
                             value={signinForm.email}
 
                         />
@@ -38,7 +38,7 @@ function SigninCard() {
                         <Input
                             type="password"
                             placeholder="Password"
-                            onchange={(e) => setSigninForm({ ...signinForm, password: e.target.value })}
+                            onChange={(e) => setSigninForm({ ...signinForm, password: e.target.value })}
                             value={signinForm.password}
                             required
                         />
