@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 function SignupCard() {
     const [signupForm, setSignupForm] = useState({
@@ -69,8 +70,11 @@ function SignupCard() {
                     <p className="text-s text-muted-foreground my-4 ">
                         Already have an account? {"  "}
                         <span className="text-sky-600 cursor-pointer hover:underline">
-
-                            Sign in
+                            <Link
+                                to='/auth/signin'
+                            >
+                                Sign in
+                            </Link>
                         </span>
                     </p>
                 </CardContent>
