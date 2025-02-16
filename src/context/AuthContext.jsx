@@ -1,3 +1,4 @@
+import { useAuth } from "@/hooks/context/useAuth"
 import { createContext, useEffect, useState } from "react"
 
 const AuthContext = createContext()
@@ -6,7 +7,8 @@ export const AuthContextProvider = ({ children }) => {
 
     const [auth, setAuth] = useState({
         user: null,
-        token: ''
+        token: '',
+        isLoading: true
     })
 
     useEffect(() => {
@@ -17,7 +19,14 @@ export const AuthContextProvider = ({ children }) => {
             console.log(user, token)
             setAuth({
                 user: JSON.parse(user),
-                token: token
+                token: token,
+                isLoading: false
+            })
+        } else {
+            setAuth({
+                user: null,
+                token: '',
+                isLoading: false
             })
         }
     }, [])
