@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { signUpRequest } from "@/api/auth";
 import { useToast } from "@/hooks/use-toast";
-import { Title } from "@radix-ui/react-toast";
 
 export const useSignUp = () => {
   const { toast } = useToast();
