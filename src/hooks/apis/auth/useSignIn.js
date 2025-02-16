@@ -11,16 +11,19 @@ export const useSignIn = () => {
     mutateAsync: signInMutation,
   } = useMutation({
     mutationFn: signInRequest,
-    onSuccess: (data) => {
-      console.log("Successfully signed in", data);
+    onSuccess: (response) => {
+      console.log("Successfully signed in", response);
+      const userObject = JSON.stringify(response.data);
+
+      // setting user and token in local storage
+      localStorage.setItem("user", userObject);
+      localStorage.setItem("token", response.data.token);
+
       toast({
         title:
           "Successfully signed in, you will be redirected to home page in few seconds",
         type: "success",
       });
-      //   alert(
-      //     "Successfully signed in, you will be redirected to home page in few seconds"
-      //   );
     },
     onError: (error) => {
       console.log("Failed to sign in", error.error.explanation);
@@ -29,7 +32,6 @@ export const useSignIn = () => {
         type: "error",
         variant: "destructive",
       });
-      //   alert(error.error.explanation);
     },
   });
 
