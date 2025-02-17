@@ -1,10 +1,30 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useAuth } from "@/hooks/context/useAuth"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { LogOutIcon, Settings2Icon, SettingsIcon, User2Icon } from "lucide-react"
+import { LogOutIcon, LucideLoader2, SettingsIcon, User2Icon } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { useToast } from "@/hooks/use-toast"
 
 export const UserButton = () => {
-    const { auth } = useAuth()
+    const { auth, Logout } = useAuth()
+    const navigate = useNavigate()
+    const { toast } = useToast()
+
+    const handleLogout = async () => {
+
+
+        await Logout()
+        toast({
+            title: 'Successfully Logged Out, redirecting you to the signin page',
+            type: 'success',
+        })
+
+
+        setTimeout(() => {
+            // navigate the user to the signin page
+            navigate('/auth/signin')
+        }, 3000);
+    }
 
     return (
         <DropdownMenu>
@@ -27,7 +47,9 @@ export const UserButton = () => {
                     <SettingsIcon className="size-4 mr-2 h-10 w-10" />
                     Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={handleLogout}
+                >
                     <LogOutIcon className="size-4 mr-2 h-10 w-10" />
                     Logout
                 </DropdownMenuItem>

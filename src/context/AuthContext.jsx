@@ -7,7 +7,7 @@ export const AuthContextProvider = ({ children }) => {
 
     const [auth, setAuth] = useState({
         user: null,
-        token: '',
+        token: null,
         isLoading: true
     })
 
@@ -25,16 +25,27 @@ export const AuthContextProvider = ({ children }) => {
         } else {
             setAuth({
                 user: null,
-                token: '',
+                token: null,
                 isLoading: false
             })
         }
     }, [])
 
 
+    async function Logout() {
+        localStorage.removeItem('user');
+        localStorage.removeItem('token')
+        setAuth({
+            user: null,
+            token: null,
+            isLoading: false
+        })
+    }
+
+
     return (
         <>
-            <AuthContext.Provider value={{ auth, setAuth }}>
+            <AuthContext.Provider value={{ auth, setAuth, Logout }}>
                 {children}
             </AuthContext.Provider>
         </>
