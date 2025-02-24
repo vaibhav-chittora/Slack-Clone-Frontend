@@ -1,9 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useAuth } from "@/hooks/context/useAuth"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { LogOutIcon, LucideLoader2, SettingsIcon, User2Icon } from "lucide-react"
+import { LogOutIcon, LucideLoader2, Pencil, PencilIcon, PlusSquareIcon, SettingsIcon, User2Icon } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useToast } from "@/hooks/use-toast"
+import { useCreateWorkspaceModal } from "@/hooks/context/useCreateWorkspaceModal"
 
 export const UserButton = () => {
     const { auth, Logout } = useAuth()
@@ -26,6 +27,14 @@ export const UserButton = () => {
         }, 3000);
     }
 
+    const { setOpenCreateWorkspaceModal } = useCreateWorkspaceModal()
+
+
+    function openCreateWorkspaceModal() {
+        setOpenCreateWorkspaceModal(true)
+    }
+
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger className="outline-none relative">
@@ -39,6 +48,10 @@ export const UserButton = () => {
                 </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
+                <DropdownMenuItem onClick={openCreateWorkspaceModal}>
+                    <PlusSquareIcon className="size-4 mr-2 h-10 w-10" />
+                    Create Workspace
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                     <User2Icon className="size-4 mr-2 h-10 w-10" />
                     Profile

@@ -12,7 +12,7 @@ export const createWorkspaceRequest = async ({ name, description, token }) => {
       }
     );
     console.log("Response in createWorkspaceRequest", response);
-    return response?.data;
+    return response?.data?.data;
   } catch (error) {
     console.log("Error in createWorkspaceRequest", error);
     throw error.response.data;
