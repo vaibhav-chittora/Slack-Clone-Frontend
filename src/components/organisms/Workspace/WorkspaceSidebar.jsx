@@ -5,7 +5,7 @@ import { BellIcon, HomeIcon, MessageSquareCodeIcon, MessageSquareIcon, MoreHoriz
 export const WorkspaceSidebar = () => {
     return (
         <>
-            <aside className="w-[70px] h-full bg-slack-dark flex flex-col items-center gap-4 pt-10 pb-5">
+            <aside className="w-[70px] h-full bg-slack-dark flex flex-col items-center gap-y-4 pt-[10px] pb-[5px]">
 
                 <SidebarButton Icon={HomeIcon} label={"Home"} />
                 <SidebarButton Icon={MessageSquareIcon} label={"Messages"} />
@@ -13,8 +13,8 @@ export const WorkspaceSidebar = () => {
                 <SidebarButton Icon={MoreHorizontalIcon} label={"More"} />
 
 
-                <div className="flex flex-col items-center justify-center  mt-auto gap-y-1">
-                    <UserButton className="" />
+                <div className="flex flex-col items-center justify-center  mt-auto mb-5 gap-y-1">
+                    <UserButton />
                 </div>
             </aside>
         </>

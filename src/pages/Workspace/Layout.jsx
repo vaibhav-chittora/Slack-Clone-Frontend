@@ -2,8 +2,8 @@ import { WorkspaceSidebar } from "@/components/organisms/Workspace/WorkspaceSide
 
 export const WorkspaceLayout = ({ children }) => {
     return (
-        <div className="h-[100vh]   ">
-            <div className="flex h-[100vh]">
+        <div className="h-[100vh]">
+            <div className="flex h-full">
                 <WorkspaceSidebar />
                 {children}
 

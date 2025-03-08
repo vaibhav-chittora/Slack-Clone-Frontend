@@ -13,7 +13,14 @@ export const AppRoutes = () => {
             <Route path="/auth/signup" element={<Auth ><SignupContainer /></Auth>} />
             <Route path="/auth/signin" element={<Auth ><SigninContainer /></Auth>} />
             <Route path='/home' element={<ProtectedRoute> <Auth> <Home /> </Auth></ProtectedRoute>} />
-            <Route path='/workspaces/:workspaceId' element={<ProtectedRoute> <Auth> <WorkspaceLayout /> </Auth></ProtectedRoute>} />
+            <Route
+                path='/workspaces/:workspaceId'
+                element={<ProtectedRoute>
+                    <Auth>
+                        <WorkspaceLayout />
+                    </Auth>
+                </ProtectedRoute>}
+            />
 
             //not found page
             <Route path='*' element={<Notfound />} />
