@@ -22,6 +22,6 @@ export const useGetWorkspaceById = (id) => {
       console.log("Failed to fetch workspace details", error);
     },
   });
-  console.log("Workspace Details", data);
+  console.log("Workspace Details", workspace);
   return { isFetching, isSuccess, error, workspace };
 };

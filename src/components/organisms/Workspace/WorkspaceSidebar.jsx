@@ -1,11 +1,14 @@
 import { UserButton } from "@/components/atoms/UserButton/UserButton"
 import { SidebarButton } from "@/components/molecules/SidebarButton/SidebarButton"
-import { BellIcon, HomeIcon, MessageSquareCodeIcon, MessageSquareIcon, MoreHorizontalIcon } from "lucide-react"
+import { BellIcon, HomeIcon, MessageSquareIcon, MoreHorizontalIcon } from "lucide-react"
+import { WorkspaceSwitcher } from '@/components/organisms/Workspace/WorkspaceSwitcher'
 
 export const WorkspaceSidebar = () => {
     return (
         <>
             <aside className="w-[70px] h-full bg-slack-dark flex flex-col items-center gap-y-4 pt-[10px] pb-[5px]">
+
+                <WorkspaceSwitcher />
 
                 <SidebarButton Icon={HomeIcon} label={"Home"} />
                 <SidebarButton Icon={MessageSquareIcon} label={"Messages"} />
