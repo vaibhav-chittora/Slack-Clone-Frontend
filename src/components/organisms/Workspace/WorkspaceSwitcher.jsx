@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useFetchWorkspace } from "@/hooks/apis/workspaces/useFetchWorkspace";
 import { useGetWorkspaceById } from "@/hooks/apis/workspaces/useGetWorkspaceById";
 import { Loader } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,14 +10,46 @@ export const WorkspaceSwitcher = () => {
     const { workspaceId } = useParams();
 
     const { isFetching, workspace } = useGetWorkspaceById(workspaceId);
+
+    const { workspaces, isFetching: isFetchingWorkspaces } = useFetchWorkspace()
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <Button className="size-9 relative overflow-hidden bg-[#ABABAD] hover:bg-[#ABABAD]/80 font-semibold text-slate-800 text-xl">
 
-                    {isFetching ? <Loader className="animate-spin" /> : workspace?.name.charAt(0).toUpperCase()}
+                    {isFetching ? <Loader className="animate-spin size-5" /> : workspace?.name.charAt(0).toUpperCase()}
                 </Button>
             </DropdownMenuTrigger>
+
+            <DropdownMenuContent>
+                <DropdownMenuItem className='cursor-pointer flex flex-col justify-start items-start'>
+                    {workspace?.name}
+                    <span className="text-xs text-muted-foreground">
+                        (Active Workspace)
+                    </span>
+                </DropdownMenuItem>
+
+                {isFetchingWorkspaces ? <Loader className="size-5 animate-spin" /> : (
+                    workspaces.map((workspace) => {
+                        if (workspace._id === workspaceId) {
+                            return null
+                        }
+                        return (
+
+                            <DropdownMenuItem
+                                className='cursor-pointer flex flex-col justify-start items-start'
+                                key={workspace._id}
+                                onClick={() => navigate(`/workspaces/${workspace._id}`)}
+                            >
+                                <p className="truncate">
+                                    {workspace?.name}
+                                </p>
+                            </DropdownMenuItem>
+                        )
+                    })
+                )}
+
+            </DropdownMenuContent>
 
         </DropdownMenu>
     )
