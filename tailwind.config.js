@@ -15,6 +15,7 @@ module.exports = {
         slack: {
           DEFAULT: "#5c3858",
           dark: "#481349",
+          medium: "#5e2c5f",
         },
         card: {
           DEFAULT: "hsl(var(--card))",
