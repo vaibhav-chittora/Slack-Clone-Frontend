@@ -3,18 +3,27 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { useAuth } from "@/hooks/context/useAuth"
 import { useWorkspacePreferencesModal } from "@/hooks/context/useWorkspacePreferencesModal"
 import { ChevronDownIcon, ListFilterIcon, SquarePenIcon } from "lucide-react"
+import { useEffect } from "react"
 
 export const WorkspacePanelHeader = ({ workspace }) => {
 
     console.log("Workspace is - ", workspace);
+
     const workspaceMembers = workspace?.members
+
     const { auth } = useAuth()
     console.log("Auth object - ", auth);
+
     const isLoggedInUserAdminOfWorkspace = workspaceMembers?.find(member => member.memberId === auth?.user?._id && member.role === "admin")
+
 
     console.log("Loggedin User - ", isLoggedInUserAdminOfWorkspace);
 
-    const { setOpenPreferences, setInitialValue } = useWorkspacePreferencesModal()
+    const { setOpenPreferences, setInitialValue, setWorkspace } = useWorkspacePreferencesModal();
+
+    useEffect(() => {
+        setWorkspace(workspace)
+    }, [])
 
     return (
         < div className="flex items-center justify-between px-4 h-[50px] gap-0.5">

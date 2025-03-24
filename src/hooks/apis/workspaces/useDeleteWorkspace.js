@@ -1,6 +1,7 @@
 import { deleteWorkspaceRequest } from "@/api/workspaces";
 import { useAuth } from "@/hooks/context/useAuth";
 import { useMutation } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 export const useDeleteWorkspace = (workspaceId) => {
   const { auth } = useAuth();

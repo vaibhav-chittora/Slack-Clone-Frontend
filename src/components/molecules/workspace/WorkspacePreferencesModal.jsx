@@ -1,11 +1,41 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { useDeleteWorkspace } from "@/hooks/apis/workspaces/useDeleteWorkspace"
 import { useWorkspacePreferencesModal } from "@/hooks/context/useWorkspacePreferencesModal"
+import { useToast } from "@/hooks/use-toast"
 import { TrashIcon } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export const WorkspacePreferencesModal = () => {
 
-    const { initialValue, openPreferences, setOpenPreferences } = useWorkspacePreferencesModal()
+    const { initialValue, openPreferences, setOpenPreferences, workspace } = useWorkspacePreferencesModal();
+
+    const [workspaceId, setWorkspaceId] = useState(null);
+    const { deleteWorkspaceMutation } = useDeleteWorkspace(workspaceId);
+
+    const { toast } = useToast();
+
+    useEffect(() => {
+        setWorkspaceId(workspace?._id)
+    }, [workspace])
+
+    async function handleDeleteWorkspace() {
+        try {
+            await deleteWorkspaceMutation();
+            toast({
+                title: "Workspace deleted successfully",
+                type: "success",
+            })
+        } catch (error) {
+            console.log("Error in deleting workspace", error)
+            toast({
+                title: "Error in deleting workspace",
+                type: "error",
+            })
+        }
+    }
+
+
     return (
         <Dialog open={openPreferences} onOpenChange={setOpenPreferences}>
             <DialogContent className="p-0 bg-gray-50 overflow-hidden">
@@ -35,7 +65,11 @@ export const WorkspacePreferencesModal = () => {
                             {initialValue}
                         </p>
                     </div>
-                    <Button variant="destructive" className=" flex w-1/2 mt-4 items-center justify-center">
+                    <Button
+                        variant="destructive"
+                        className=" flex w-1/2 mt-4 items-center justify-center"
+                        onClick={handleDeleteWorkspace}
+                    >
                         <TrashIcon className="size-5" />
                         <p>
                             Delete Workspace
