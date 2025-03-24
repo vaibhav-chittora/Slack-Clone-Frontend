@@ -11,7 +11,6 @@ export const WorkspacePreferencesModal = () => {
             <DialogContent className="p-0 bg-gray-50 overflow-hidden">
                 <DialogHeader className='p-4 border-bottom bg-white ' >
                     <DialogTitle>
-                        {initialValue}
                         Preferences
                     </DialogTitle>
                 </DialogHeader>
@@ -31,8 +30,10 @@ export const WorkspacePreferencesModal = () => {
                             >
                                 Edit
                             </p>
-
                         </div>
+                        <p className="text-sm font-semibold text-gray-500">
+                            {initialValue}
+                        </p>
                     </div>
                     <Button variant="destructive" className=" flex w-1/2 mt-4 items-center justify-center">
                         <TrashIcon className="size-5" />
