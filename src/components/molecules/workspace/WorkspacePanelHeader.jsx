@@ -14,7 +14,7 @@ export const WorkspacePanelHeader = ({ workspace }) => {
     const { auth } = useAuth()
     console.log("Auth object - ", auth);
 
-    const isLoggedInUserAdminOfWorkspace = workspaceMembers?.find(member => member.memberId === auth?.user?._id && member.role === "admin")
+    const isLoggedInUserAdminOfWorkspace = workspaceMembers?.find(member => member.memberId._id === auth?.user?._id && member.role === "admin")
 
 
     console.log("Loggedin User - ", isLoggedInUserAdminOfWorkspace);
