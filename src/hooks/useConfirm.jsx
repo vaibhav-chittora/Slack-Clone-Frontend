@@ -33,7 +33,7 @@ export const useConfirm = ({ title, message }) => {
   const ConfirmDialog = () => {
     return (
       <AlertDialog open={promise !== null}>
-        <AlertDialogTrigger>Confirmation Dialog</AlertDialogTrigger>
+        <AlertDialogTrigger></AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>{title}</AlertDialogTitle>
