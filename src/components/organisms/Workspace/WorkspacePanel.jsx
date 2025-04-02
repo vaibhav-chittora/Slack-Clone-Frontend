@@ -1,13 +1,18 @@
 import { SidebarItem } from "@/components/atoms/SidebarItem/SidebarItem"
 import { WorkspacePanelHeader } from "@/components/molecules/workspace/WorkspacePanelHeader"
+import { WorkspacePanelSection } from "@/components/molecules/workspace/WorkspacePanelSection"
 import { useGetWorkspaceById } from "@/hooks/apis/workspaces/useGetWorkspaceById"
-import { AlertTriangleIcon, Loader, MessageSquareTextIcon } from "lucide-react"
+import { AlertTriangleIcon, HashIcon, Loader, MessageSquareTextIcon, SendHorizontal } from "lucide-react"
 import { useParams } from "react-router-dom"
+import { RiDraftLine } from 'react-icons/ri'
+import { useCreateChannelModal } from "@/hooks/context/useCreateChannelModal"
 
 export const WorkspacePanel = () => {
 
     const { workspaceId } = useParams()
-    const { workspace, isFetching, isSuccess } = useGetWorkspaceById(workspaceId)
+    const { workspace, isFetching, isSuccess } = useGetWorkspaceById(workspaceId);
+
+    const { openCreateChannelModal, setOpenCreateChannelModal } = useCreateChannelModal()
 
     if (isFetching) {
         return (
@@ -39,7 +44,32 @@ export const WorkspacePanel = () => {
                     variant="active"
                 />
 
+                <SidebarItem
+                    label="Drafts"
+                    icon={RiDraftLine}
+                    id="drafts"
+                    variant="default"
+                />
+
+                <SidebarItem
+                    label="Sends"
+                    icon={SendHorizontal}
+                    id="sends"
+                    variant="default"
+                />
+
             </div>
+
+
+            <WorkspacePanelSection
+                label={"Channels"}
+                onIconClick={() => { setOpenCreateChannelModal(true) }}
+
+            >
+                {workspace?.channels?.map((channel) => {
+                    return <SidebarItem key={channel._id} label={channel?.name} icon={HashIcon} variant="default" id={channel._id} />
+                })}
+            </WorkspacePanelSection>
 
         </div>
     )
