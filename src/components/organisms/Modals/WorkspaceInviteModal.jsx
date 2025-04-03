@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { useResetWorkspaceJoinCode } from "@/hooks/apis/workspaces/useResetWorkspaceJoinCode"
 import { useToast } from "@/hooks/use-toast"
 import { CopyIcon, RefreshCcwIcon } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export const WorkspaceInviteModal = ({ workspaceName, joinCode, openInviteModal, setOpenInviteModal, workspaceId }) => {
     const { toast } = useToast()
@@ -11,7 +12,7 @@ export const WorkspaceInviteModal = ({ workspaceName, joinCode, openInviteModal,
 
 
     async function handleCopy() {
-        const inviteLink = `${window.location.origin}/join/${joinCode}`
+        const inviteLink = `${joinCode}`
 
         await navigator.clipboard.writeText(inviteLink);
         toast({
@@ -63,6 +64,15 @@ export const WorkspaceInviteModal = ({ workspaceName, joinCode, openInviteModal,
                         Copy Code
                         <CopyIcon className="size-4 ml-2" />
                     </Button>
+
+                    {/* Link to redirect the user in a new tab to the join page */}
+                    <Link
+                        to={`/workspaces/join/${workspaceId}`}
+                        className="text-blue-500 hover:underline"
+                        target="_blank"
+                    >
+                        Redirect to join page
+                    </Link>
                 </div>
                 <div className="flex flex-col items-center justify-center w-full">
 
