@@ -6,6 +6,7 @@ import { AlertTriangleIcon, HashIcon, Loader, MessageSquareTextIcon, SendHorizon
 import { useParams } from "react-router-dom"
 import { RiDraftLine } from 'react-icons/ri'
 import { useCreateChannelModal } from "@/hooks/context/useCreateChannelModal"
+import { UserItem } from "@/components/atoms/UserItem/UserItem"
 
 export const WorkspacePanel = () => {
 
@@ -68,6 +69,20 @@ export const WorkspacePanel = () => {
             >
                 {workspace?.channels?.map((channel) => {
                     return <SidebarItem key={channel._id} label={channel?.name} icon={HashIcon} variant="default" id={channel._id} />
+                })}
+            </WorkspacePanelSection>
+
+            <WorkspacePanelSection
+                label={"Members"}
+                onIconClick={() => { }}
+            >
+                {workspace?.members?.map((item) => {
+                    return <UserItem
+                        key={item._id}
+                        image={item?.memberId?.avatar}
+                        label={item.username}
+                        id={item._id}
+                    />
                 })}
             </WorkspacePanelSection>
 

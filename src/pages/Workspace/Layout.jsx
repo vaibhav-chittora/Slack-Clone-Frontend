@@ -27,7 +27,6 @@ export const WorkspaceLayout = ({ children }) => {
                         {children}
                     </ResizablePanel>
                 </ResizablePanelGroup>
-                <h1>Workspaces</h1>
             </div>
 
 
