@@ -3,6 +3,8 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import { useEffect, useRef, useState } from "react";
 import { PiTextAa } from "react-icons/pi";
+import Hint from "../Hint/Hint";
+import { ImageIcon } from "lucide-react";
 
 export const Editor = ({
     variant = "create",
@@ -47,7 +49,7 @@ export const Editor = ({
             modules: {
                 toolbar: [
                     ["bold", "italic", "underline", "strike"],
-                    ["link", "image"],
+                    ["link"],
                     [{ list: "ordered" }, { list: "bullet" }],
                     ["clean"],
                 ],
@@ -88,20 +90,36 @@ export const Editor = ({
                 <div className="h-full ql-custom" ref={containerRef} />
 
                 <div className="flex px-2 pb-2 z-[5] ">
-                    <Button
-                        size='iconSm'
-                        variant='ghost'
-                        disabled={false}
-                        onClick={toggleToolbar}
+                    <Hint
+                        label={!isToolbarVisible ? "Hide toolbar" : "Show toolbar"}
                     >
-                        <PiTextAa className="size-4" />
-                    </Button>
+                        <Button
+                            size='iconSm'
+                            variant='ghost'
+                            disabled={false}
+                            onClick={toggleToolbar}
+                        >
+                            <PiTextAa className="size-4" />
+                        </Button>
 
+                    </Hint>
+                    <Hint
+                        label='Image'
+                    >
+                        <Button
+                            variant='ghost'
+                            onClick={() => { }}
+                            size='iconSm'
+                            disabled={disabled}
+                        >
+                            <ImageIcon className="size-4" />
+                        </Button>
+                    </Hint>
                 </div>
             </div>
 
             <p className=" p-2 text-[10px] text-muted-foreground flex justify-end">
-                <strong>Shift + Enter</strong>&nbsp; to insert a new line
+                <strong>Shift + Enter</strong>&nbsp;to insert a new line
             </p>
         </div>
     );

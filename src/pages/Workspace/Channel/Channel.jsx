@@ -1,3 +1,4 @@
+import { ChannelHeader } from "@/components/molecules/ChannelHeader/ChannelHeader"
 import { ChatInput } from "@/components/molecules/ChatInput/ChatInput"
 import { useGetChannelById } from "@/hooks/apis/channels/useGetChannelById"
 import { Loader2, TriangleAlertIcon } from "lucide-react"
@@ -25,11 +26,10 @@ export const Channel = () => {
 
     return (
         <div className="flex flex-col h-full">
+            <ChannelHeader name={channelDetails?.name} />
 
-            <div className="flex-1">
-                <ChatInput />
-
-            </div>
+            <div className="flex-1" />
+            <ChatInput />
         </div>
     )
 }
