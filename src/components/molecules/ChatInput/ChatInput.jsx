@@ -1,6 +1,10 @@
 import { Editor } from "@/components/atoms/Editor/Editor"
 
 export const ChatInput = () => {
+
+    function handleSubmit({ body }) {
+        console.log(body)
+    }
     return (
         <div
             className="px-5 w-full "
@@ -8,7 +12,7 @@ export const ChatInput = () => {
             <Editor
                 placeholder="Type your message here..."
                 variant="create"
-                onsubmit={() => { }}
+                onSubmit={handleSubmit}
                 onCancel={() => { }}
                 disabled={false}
                 defaultValue=""

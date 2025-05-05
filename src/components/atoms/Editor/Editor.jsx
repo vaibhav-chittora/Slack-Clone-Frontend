@@ -4,11 +4,11 @@ import "quill/dist/quill.snow.css";
 import { useEffect, useRef, useState } from "react";
 import { PiTextAa } from "react-icons/pi";
 import Hint from "../Hint/Hint";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, SendIcon } from "lucide-react";
 
 export const Editor = ({
     variant = "create",
-    onsubmit,
+    onSubmit,
     onCancel,
     placeholder,
     disabled,
@@ -113,6 +113,23 @@ export const Editor = ({
                             disabled={disabled}
                         >
                             <ImageIcon className="size-4" />
+                        </Button>
+                    </Hint>
+
+                    <Hint
+                        label='Send message'
+
+                    >
+                        <Button
+                            size='iconSm'
+                            className='ml-auto bg-[#007a6a] hover:bg-[#007a6a]/80 text-white'
+                            onClick={() => {
+                                onSubmit({ body: JSON.stringify(quillRef.current?.getContents()) });
+                            }}
+                            disabled={disabled}
+                        >
+
+                            <SendIcon className="size-4" />
                         </Button>
                     </Hint>
                 </div>
