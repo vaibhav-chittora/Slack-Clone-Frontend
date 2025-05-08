@@ -2,7 +2,7 @@ import { Editor } from "@/components/atoms/Editor/Editor"
 
 export const ChatInput = () => {
 
-    function handleSubmit({ body }) {
+    async function handleSubmit({ body }) {
         console.log(body)
     }
     return (
