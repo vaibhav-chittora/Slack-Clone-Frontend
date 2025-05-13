@@ -13,7 +13,7 @@ export const Payments = () => {
   async function handleFormSubmit(e) {
     e.preventDefault()
     const response = await createOrderMutation(amount * 100)
-    setOrderResponse(response?.data?.data)
+    setOrderResponse(response)
   }
 
   return (
